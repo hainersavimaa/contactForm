@@ -281,10 +281,10 @@ input[type=radio] + label:before {
   vertical-align: text-top;
   width: 24px;
   height: 24px;
-  background: $input-bg;
+  background: #fff;
   border-radius: 50%;
 }
-input[type=radio]:hover + label:before { background: $input-bg; }
+input[type=radio]:hover + label:before { background: #fff; }
 input[type=radio]:checked + label:before { background: #fff; }
 input[type=radio]:disabled + label { color: #b8b8b8; cursor: auto; }
 input[type=radio]:disabled + label:before { box-shadow: none; background: #ddd; }
@@ -311,16 +311,16 @@ input[type=checkbox] + label:before {
    vertical-align: text-top;
    width: 22px;
    height: 22px;
-   background: $input-bg;
+   background: #fff;
    border-radius: 3px;
    }
-input[type=checkbox]:hover + label:before { background: $input-bg; }
-input[type=checkbox]:checked + label:before { background: #fff; }
+input[type=checkbox]:hover + label:before { background: #fff; }
+input[type=checkbox]:checked + label:before { background: $secondary; }
 input[type=checkbox]:disabled + label { color: #b8b8b8; cursor: auto; }
 input[type=checkbox]:disabled + label:before { box-shadow: none; background: #ddd; }
 input[type=checkbox]:checked + label:after {
    content: '✓';
-   color: $secondary;
+   color: #fff;
    font-size: 20px;
    font-weight: bold;
    left: 4px;
