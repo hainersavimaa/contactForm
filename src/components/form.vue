@@ -2,23 +2,27 @@
    <div id="formView">
       <form id="contactForm" class="contact-form" v-if="!submitted">
          <h1>Kontaktandmed</h1>
-         <label>Ees -ja perenimi</label>
-         <input type="text" v-model="contactForm.submittedName"/>
+         <label class="field-label" for="">Ees -ja perenimi</label>
+         <input type="text" name="Nimi" v-model="contactForm.submittedName" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('Nimi') }"/>
+         <span v-show="errors.has('Nimi')" class="help is-danger">{{ errors.first('Nimi') }}</span>
          <br>
-         <label>Telefon</label>
-         <input type="tel" v-model="contactForm.submittedPhone" placeholder="+372 "/>
+         <label class="field-label" for="">Telefon</label>
+         <input type="tel" id="phone-input" name="Telefon" v-model="contactForm.submittedPhone" v-validate="phoneRules" :class="{'input': true, 'is-danger': errors.has('Telefon') }" placeholder="+372 "/>
+         <span v-show="errors.has('Telefon')" class="help is-danger">{{ errors.first('Telefon') }}</span>
          <br>
-         <label>E-post</label>
-         <input type="email" v-model="contactForm.submittedEmail"/>
+         <label class="field-label" for="">E-post</label>
+         <input type="email" name="Email" v-model="contactForm.submittedEmail" v-validate="emailRules" :class="{'input': true, 'is-danger': errors.has('Email') }"/>
+         <span v-show="errors.has('Email')" class="help is-danger">{{ errors.first('Email') }}</span>
          <br>
-         <label>Tänav, maja, korter</label>
-         <input type="text"v-model="contactForm.submittedAddress"/>
+         <label class="field-label" for="">Tänav, maja, korter</label>
+         <input type="text" name="Aadress" v-model="contactForm.submittedAddress" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('Aadress') }"/>
+         <span v-show="errors.has('Aadress')" class="help is-danger">{{ errors.first('Aadress') }}</span>
          <br>
-         <label>Küla/alevik</label>
-         <input type="text"v-model="contactForm.submittedArea"/>
+         <label class="field-label" for="">Küla/alevik</label>
+         <input type="text" name="Alevik" v-model="contactForm.submittedArea"/>
          <br>
-         <label>Linn/maakond</label>
-         <select v-model="contactForm.submittedCounty">
+         <label class="field-label" for="">Linn/maakond</label>
+         <select name="Maakond" v-validate="'required'" v-model="contactForm.submittedCounty":class="{'input': true, 'is-danger': errors.has('Maakond') }">
             <option value="" disabled selected hidden>Vali</option>
             <option value="Harjumaa">Harjumaa</option>
             <option value="Hiiumaa">Hiiumaa</option>
@@ -36,6 +40,7 @@
             <option value="Viljandimaa">Viljandimaa</option>
             <option value="Võrumaa">Võrumaa</option>
          </select>
+         <span v-show="errors.has('Maakond')" class="help is-danger">{{ errors.first('Maakond') }}</span>
          <br>
          <div class="radio-button-wrap">
             <input type="radio" name="deliveryAddress" id="delivery1" value="false" checked v-model="contactForm.newAddress"/> <label for="delivery1" class="check-label">Kohaletoimetamine sama aadressile</label>
@@ -44,15 +49,16 @@
             <input type="radio" name="deliveryAddress" id="delivery2" value="true" v-model="contactForm.newAddress"/> <label for="delivery2" class="check-label">Kohaletoimetamine erinevale aadressile</label>
          </div>
          <!-- Lisa-aadressi algus -->
-         <div v-if="contactForm.newAddress==='true'">
-            <label>Tänav, maja, korter</label>
-            <input type="text" v-model="contactForm.submittedExtraAddress"/>
+         <div class="additional-form" v-if="contactForm.newAddress==='true'">
+            <label class="field-label" for="">Tänav, maja, korter</label>
+            <input type="text" name="Lisa-aadress" v-model="contactForm.submittedExtraAddress" v-validate="'required|alpha'" :class="{'input': true, 'is-danger': errors.has('Lisa-aadress') }"/>
+            <span v-show="errors.has('Lisa-aadress')" class="help is-danger">{{ errors.first('Lisa-aadress') }}</span>
             <br>
-            <label>Küla/alevik</label>
-            <input v-model="contactForm.submittedExtraArea"/>
+            <label class="field-label" for="">Küla/alevik</label>
+            <input type="text" name="Lisa-Alevik" v-model="contactForm.submittedExtraArea"/>
             <br>
-            <label>Linn/maakond</label>
-            <select v-model="contactForm.submittedExtraCounty">
+            <label class="field-label" for="">Linn/maakond</label>
+            <select name="Linn" v-validate="'required'" v-model="contactForm.submittedExtraCounty" :class="{'input': true, 'is-danger': errors.has('Linn') }">
                <option value="" disabled selected hidden>Vali</option>
                <option value="Harjumaa">Harjumaa</option>
                <option value="Hiiumaa">Hiiumaa</option>
@@ -70,14 +76,15 @@
                <option value="Viljandimaa">Viljandimaa</option>
                <option value="Võrumaa">Võrumaa</option>
             </select>
+            <span v-show="errors.has('Linn')" class="help is-danger">{{ errors.first('Linn') }}</span>
          </div> <!-- Lisa-aadressi lõpp -->
          <div class="accept-box-wrap">
-            <input type="checkbox" value="true" v-model="contactForm.submittedAccept"/> <!-- v-model lisab true väärtuse submittedAccept muutujale -->
-            <label>Olen tingimustega tutvunud</label>
+            <input type="checkbox" value="true" name="acceptCond" id="acceptCond" v-model="contactForm.submittedAccept"/> <!-- v-model lisab true väärtuse submittedAccept muutujale -->
+            <label for="acceptCond" class="check-label">Olen tingimustega tutvunud</label>
          </div>
          <!-- Salvesta nupp-->
          <div class="submit-button-wrap">
-            <button :disabled="!contactForm.submittedAccept" v-on:click.prevent="submitForm">Salvesta</button> <!-- Nupp on disabled kuni submittedAccept on true. Vajutades kutsutakse submitForm meetod, mis määrab muutuja "submitted" true-ks. -->
+            <button :disabled="!contactForm.submittedAccept" v-on:click.prevent="submitForm" class="submit-button">Salvesta</button> <!-- Nupp on disabled kuni submittedAccept on true. Vajutades kutsutakse submitForm meetod, mis määrab muutuja "submitted" true-ks. -->
          </div>
       </form>
       <div id="readOnly" v-if="submitted" class="read-only"> <!-- readOnly on ainult siis nähtav kui kasutaja on vajutanud "Salvesta" nuppu -->
@@ -135,11 +142,9 @@ export default {
       editFrom: function(){   //See funktsioon kutsutakse "Muuda" nuppu vajutades
          this.submitted = false; // Kuvatakse kontaktvorm ja peidetakse readOnly vaade
       },
-}
+   }
 }
 </script>
-
-
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
