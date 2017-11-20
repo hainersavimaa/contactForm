@@ -9,7 +9,7 @@ webpack
 vee-validate
 
 ## Täidetud punktid:
-Absoluutselt miinimum: kõik on punktid täidetud. Hetkel piisab telefoni numbri valideerimiseks vaid numbrite sisestamisest.<br>
+Absoluutselt miinimum: kõik punktid on täidetud. Hetkel piisab telefoni numbri valideerimiseks vaid numbrite sisestamisest.<br>
 Lisapunktid:<br>
 Valideerimine toimub brauseris kohe, kui andmeid sisestatakse.<br>
 Vormi peaks saama kiirelt rebrändida sh muuta värve, fonte jne.<br>
