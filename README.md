@@ -1,18 +1,18 @@
 # contactform
 
-> A test project for icefire.
+Proovitöö front-end arendaja positsioonile
 
-## Build Setup
+## Kasutatud
+vue.js
+vue-cli
+webpack
+vee-validate
 
-``` bash
-# install dependencies
-npm install
+## Täidetud punktid:
+Absoluutselt miinimum: kõik on punktid täidetud. Hetkel piisab telefoni numbri valideerimiseks vaid numbrite sisestamisest.
+Lisapunktid:
+Valideerimine toimub brauseris kohe, kui andmeid sisestatakse.
+Vormi peaks saama kiirelt rebrändida sh muuta värve, fonte jne.
+Vorm peab töötama IE8-s ja IE9-s.
+Peale vormi salvestamist read-only andmetega ekraanil peab olema nupp “Muuda”, mille peale vajutades avaneb esimene vorm eeltäidetud andmetega.
 
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
